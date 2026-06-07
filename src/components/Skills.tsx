@@ -69,10 +69,7 @@ const skillGroups: SkillGroup[] = [
 ];
 
 const allBadges = [
-  'Python', 'TypeScript', 'JavaScript', 'Java', 'SQL',
-  'React', 'Tailwind CSS', 'Node.js', 'Express.js', 'Flask',
-  'MongoDB', 'PostgreSQL', 'MySQL', 'Redis',
-  'Docker', 'Git', 'Linux', 'REST API',
+  'Python', 'React', 'Node.js', 'MongoDB', 'Docker', 'TypeScript',
 ];
 
 export default function Skills() {
