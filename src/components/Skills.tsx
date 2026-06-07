@@ -13,9 +13,9 @@ const skillGroups: SkillGroup[] = [
     icon: '⌨️',
     color: 'linear-gradient(135deg,#111111,#444444)',
     skills: [
-      { name: 'Python',     level: 92 },
-      { name: 'Java',       level: 78 },
-      { name: 'SQL',        level: 82 },
+      { name: 'Python', level: 92 },
+      { name: 'Java', level: 78 },
+      { name: 'SQL', level: 82 },
       { name: 'TypeScript', level: 80 },
       { name: 'JavaScript', level: 85 },
     ],
@@ -25,10 +25,10 @@ const skillGroups: SkillGroup[] = [
     icon: '🎨',
     color: 'linear-gradient(135deg,#333333,#666666)',
     skills: [
-      { name: 'React',       level: 88 },
-      { name: 'HTML / CSS',  level: 90 },
-      { name: 'Tailwind CSS',level: 85 },
-      { name: 'PyQt5',       level: 78 },
+      { name: 'React', level: 88 },
+      { name: 'HTML / CSS', level: 90 },
+      { name: 'Tailwind CSS', level: 85 },
+      { name: 'PyQt5', level: 78 },
     ],
   },
   {
@@ -36,10 +36,10 @@ const skillGroups: SkillGroup[] = [
     icon: '⚙️',
     color: 'linear-gradient(135deg,#222222,#555555)',
     skills: [
-      { name: 'Node.js',        level: 84 },
-      { name: 'Express.js',     level: 82 },
-      { name: 'REST API Design',level: 88 },
-      { name: 'Flask',          level: 80 },
+      { name: 'Node.js', level: 84 },
+      { name: 'Express.js', level: 82 },
+      { name: 'REST API Design', level: 88 },
+      { name: 'Flask', level: 80 },
     ],
   },
   {
@@ -47,23 +47,11 @@ const skillGroups: SkillGroup[] = [
     icon: '🗄️',
     color: 'linear-gradient(135deg,#444444,#777777)',
     skills: [
-      { name: 'MongoDB',    level: 85 },
-      { name: 'MySQL',      level: 80 },
+      { name: 'MongoDB', level: 85 },
+      { name: 'MySQL', level: 80 },
       { name: 'PostgreSQL', level: 75 },
-      { name: 'Redis',      level: 72 },
-      { name: 'ChromaDB',   level: 70 },
-    ],
-  },
-  {
-    category: 'AI / ML',
-    icon: '🧠',
-    color: 'linear-gradient(135deg,#111111,#555555)',
-    skills: [
-      { name: 'TensorFlow', level: 82 },
-      { name: 'YOLOv8',     level: 85 },
-      { name: 'OpenCV',     level: 88 },
-      { name: 'MediaPipe',  level: 84 },
-      { name: 'Scikit-learn',level: 76 },
+      { name: 'Redis', level: 72 },
+      { name: 'ChromaDB', level: 70 },
     ],
   },
   {
@@ -71,20 +59,20 @@ const skillGroups: SkillGroup[] = [
     icon: '🛠️',
     color: 'linear-gradient(135deg,#333333,#666666)',
     skills: [
-      { name: 'Docker',         level: 76 },
-      { name: 'Git / GitHub',   level: 90 },
+      { name: 'Docker', level: 76 },
+      { name: 'Git / GitHub', level: 90 },
       { name: 'GitHub Actions', level: 74 },
       { name: 'Linux (Ubuntu)', level: 80 },
-      { name: 'Postman',        level: 85 },
+      { name: 'Postman', level: 85 },
     ],
   },
 ];
 
 const allBadges = [
-  'Python','React','Node.js','TypeScript','Java','MongoDB','MySQL',
-  'PostgreSQL','Docker','Git','TensorFlow','YOLOv8','OpenCV','MediaPipe',
-  'Flask','Express.js','Tailwind CSS','Redis','ChromaDB','PyQt5',
-  'REST API','GitHub Actions','Linux','Postman','LSTM','Scikit-learn',
+  'Python', 'TypeScript', 'JavaScript', 'Java', 'SQL',
+  'React', 'Tailwind CSS', 'Node.js', 'Express.js', 'Flask',
+  'MongoDB', 'PostgreSQL', 'MySQL', 'Redis',
+  'Docker', 'Git', 'Linux', 'REST API',
 ];
 
 export default function Skills() {

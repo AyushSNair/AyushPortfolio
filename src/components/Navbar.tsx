@@ -20,8 +20,6 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-
-      // Determine active section
       const sections = navLinks.map(l => l.href.slice(1));
       for (const section of sections.reverse()) {
         const el = document.getElementById(section);
@@ -31,7 +29,6 @@ export default function Navbar() {
         }
       }
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -39,68 +36,124 @@ export default function Navbar() {
   const handleNavClick = useCallback((href: string) => {
     setIsMobileOpen(false);
     const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/90 backdrop-blur-xl border-b border-black/8 shadow-sm'
-          : 'bg-transparent'
-      }`}
+      style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+        transition: 'all 0.3s ease',
+        background: isScrolled ? 'rgba(255,255,255,0.92)' : 'transparent',
+        backdropFilter: isScrolled ? 'blur(20px)' : 'none',
+        WebkitBackdropFilter: isScrolled ? 'blur(20px)' : 'none',
+        borderBottom: isScrolled ? '1px solid rgba(0,0,0,0.07)' : 'none',
+        boxShadow: isScrolled ? '0 1px 20px rgba(0,0,0,0.06)' : 'none',
+      }}
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
+
           {/* Logo */}
           <button
             onClick={() => handleNavClick('#home')}
-            className="flex items-center gap-2 group"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'none', border: 'none', cursor: 'pointer' }}
             aria-label="Go to home"
           >
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-gray-800 to-black flex items-center justify-center font-bold text-white text-lg shadow-sm group-hover:shadow-black/20 transition-shadow duration-300">
+            <div style={{
+              width: 36, height: 36, borderRadius: '0.625rem',
+              background: 'linear-gradient(135deg,#333333,#000000)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontWeight: 800, color: 'white', fontSize: '1.1rem',
+            }}>
               A
             </div>
-            <span className="font-bold text-black text-lg hidden sm:block">
-              Ayush<span className="text-gray-500">.</span>
+            <span style={{ fontWeight: 800, color: '#000000', fontSize: '1.05rem' }}>
+              Ayush<span style={{ color: '#999999' }}>.</span>
             </span>
           </button>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => handleNavClick(link.href)}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  activeSection === link.href.slice(1)
-                    ? 'text-black bg-black/8'
-                    : 'text-gray-500 hover:text-black hover:bg-black/5'
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.15rem' }} className="hidden lg:flex">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.slice(1);
+              return (
+                <button
+                  key={link.href}
+                  onClick={() => handleNavClick(link.href)}
+                  style={{
+                    padding: '0.4rem 0.75rem',
+                    borderRadius: '0.5rem',
+                    fontSize: '0.82rem',
+                    fontWeight: isActive ? 700 : 500,
+                    color: isActive ? '#000000' : '#777777',
+                    background: isActive ? 'rgba(0,0,0,0.07)' : 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.18s ease',
+                    whiteSpace: 'nowrap',
+                  }}
+                  onMouseEnter={e => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = '#000000';
+                      e.currentTarget.style.background = 'rgba(0,0,0,0.04)';
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = '#777777';
+                      e.currentTarget.style.background = 'transparent';
+                    }
+                  }}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
           </div>
 
           {/* CTA + Mobile Toggle */}
-          <div className="flex items-center gap-3">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <a
               href="/AyushNair_Resume.pdf"
               download
-              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-black hover:bg-gray-800 text-white text-sm font-medium transition-all duration-200 hover:shadow-lg hover:shadow-black/15"
+              className="hidden sm:flex"
+              style={{
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.55rem 1.75rem',
+                borderRadius: '0.625rem',
+                background: '#000000',
+                color: 'white',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                textDecoration: 'none',
+                letterSpacing: '0.01em',
+                transition: 'all 0.2s ease',
+                boxShadow: '0 2px 12px rgba(0,0,0,0.18)',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#222222'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.28)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#000000'; e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.18)'; }}
               aria-label="Download resume"
             >
-              Resume
+              Download CV
             </a>
 
+            {/* Mobile toggle */}
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="lg:hidden p-2 rounded-lg text-gray-500 hover:text-black hover:bg-black/8 transition-colors"
+              className="lg:hidden"
+              style={{
+                padding: '0.5rem',
+                borderRadius: '0.5rem',
+                color: '#555555',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
               aria-expanded={isMobileOpen}
               aria-label="Toggle mobile menu"
             >
@@ -112,27 +165,34 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          isMobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        style={{
+          overflow: 'hidden',
+          maxHeight: isMobileOpen ? '100vh' : '0',
+          opacity: isMobileOpen ? 1 : 0,
+          transition: 'max-height 0.3s ease, opacity 0.3s ease',
+        }}
+        className="lg:hidden"
       >
-        <div className="bg-white/95 backdrop-blur-xl border-t border-black/6 py-4">
+        <div style={{ background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(20px)', borderTop: '1px solid rgba(0,0,0,0.07)', paddingTop: '0.75rem', paddingBottom: '1rem' }}>
           {navLinks.map((link) => (
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className={`mobile-nav-link w-full text-left ${
-                activeSection === link.href.slice(1) ? 'active' : ''
-              }`}
+              className={`mobile-nav-link w-full text-left ${activeSection === link.href.slice(1) ? 'active' : ''}`}
             >
               {link.label}
             </button>
           ))}
-          <div className="px-6 pt-3 border-t border-black/6 mt-2">
+          <div style={{ padding: '0.75rem 1.5rem 0', borderTop: '1px solid rgba(0,0,0,0.07)', marginTop: '0.5rem' }}>
             <a
               href="/AyushNair_Resume.pdf"
               download
-              className="block w-full text-center px-4 py-2.5 rounded-lg bg-black text-white font-medium text-sm"
+              style={{
+                display: 'block', width: '100%', textAlign: 'center',
+                padding: '0.75rem', borderRadius: '0.625rem',
+                background: '#000000', color: 'white',
+                fontWeight: 600, fontSize: '0.875rem', textDecoration: 'none',
+              }}
             >
               Download Resume
             </a>
