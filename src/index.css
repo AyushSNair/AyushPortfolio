@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-primary-50: #f8f8f8;
+  --color-primary-100: #f0f0f0;
+  --color-primary-200: #e0e0e0;
+  --color-primary-300: #c0c0c0;
+  --color-primary-400: #888888;
+  --color-primary-500: #555555;
+  --color-primary-600: #333333;
+  --color-primary-700: #222222;
+  --color-primary-800: #111111;
+  --color-primary-900: #000000;
+
+  --color-accent-400: #444444;
+  --color-accent-500: #222222;
+
+  --color-bg-900: #ffffff;
+  --color-bg-800: #f5f5f5;
+
+  --color-surface-200: #e8e8e8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #ffffff;
+  color: #111111;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #f0f0f0; }
+::-webkit-scrollbar-thumb { background: #222222; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #000000; }
+
+::selection { background-color: #111111; color: white; }
+
+/* ── Gradient text (black to dark grey) ── */
+.gradient-text {
+  background: linear-gradient(135deg, #000000, #444444, #000000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glass card ── */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.glass-hover {
+  transition: all 0.3s ease;
+}
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.18);
+  transform: translateY(-3px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Keyframes ── */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,0,0,0.12); }
+  50%       { box-shadow: 0 0 50px rgba(0,0,0,0.22), 0 0 80px rgba(0,0,0,0.08); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.animate-float       { animation: float 3.5s ease-in-out infinite; }
+.animate-pulse-glow  { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-fade-in-up  { animation: fadeInUp 0.7s ease-out forwards; }
+.animate-spin-slow   { animation: spin-slow 10s linear infinite; }
+.animate-blink       { animation: blink 1s step-end infinite; }
+
+/* ── Sections ── */
+.section-padding {
+  padding: 7rem 1.5rem;
+}
+@media (min-width: 640px)  { .section-padding { padding: 8rem 2.5rem; } }
+@media (min-width: 1024px) { .section-padding { padding: 9rem 3rem; } }
+
+/* ── Section header ── */
+.section-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.section-header h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #000000;
+  margin-top: 0.5rem;
+  line-height: 1.2;
+}
+.section-divider {
+  width: 3.5rem;
+  height: 3px;
+  background: linear-gradient(90deg, #000000, #555555);
+  border-radius: 9999px;
+  margin: 1.25rem auto 0;
+}
+
+/* ── Section number label ── */
+.section-number {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #888888;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Tech badge ── */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #333333;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+.tech-badge:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.3);
+  transform: scale(1.06);
+}
+
+/* ── Progress bar ── */
+.progress-bar {
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #000000, #555555);
+  position: relative;
+  overflow: hidden;
+}
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* ── Orbit ring ── */
+.orbit-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  animation: spin-slow 12s linear infinite;
+}
+
+/* ── Typed cursor ── */
+.typed-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: #111111;
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+/* ── Card border glow on hover ── */
+.card-border-animate {
+  position: relative;
+  z-index: 0;
+}
+.card-border-animate::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #000000, #555555, #aaaaaa, #000000);
+  background-size: 300% 300%;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: -1;
+}
+.card-border-animate:hover::before {
+  opacity: 1;
+  animation: gradientShift 3s ease infinite;
+}
+
+/* ── Mobile nav ── */
+.mobile-nav-link {
+  display: block;
+  padding: 0.85rem 1.75rem;
+  color: #666666;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  font-size: 0.9rem;
+}
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: #000000;
+  border-left-color: #000000;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* ── Skill chip ── */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: default;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #333333;
+}
+.skill-chip:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+  border-color: rgba(0, 0, 0, 0.25);
+  color: #000000;
+}
+
+/* ── Focus ── */
+*:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
